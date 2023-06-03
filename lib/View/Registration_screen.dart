@@ -20,7 +20,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController lastName = TextEditingController();
   TextEditingController mobile = TextEditingController();
   TextEditingController email = TextEditingController();
-  var imageFile;
+  File? imageFile;
   getImage() async {
     var pickedFile =
         (await ImagePicker().pickImage(source: ImageSource.gallery));
@@ -39,7 +39,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         body: ({
           'first_name': firstName.text,
           'last_name': lastName.text,
-          'mobile': mobile.text,
+          'mobile': widget.mobilenumber,
           'email': email.text,
           "API_KEY": "sXZ7tdYP7hy2qZKD9cL",
           "tnc": "1"
@@ -74,7 +74,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           },
                           child: CircleAvatar(
                             radius: 60.0,
-                            backgroundImage: FileImage(imageFile),
+                            backgroundImage: FileImage(imageFile!),
                           ),
                         )
                       : GestureDetector(
@@ -106,7 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     controller: mobile,
                     maxLength: 10,
                     decoration: InputDecoration(
-                      labelText: 'Mobile Number',
+                      hintText: widget.mobilenumber,
                     ),
                     keyboardType: TextInputType.number,
                   ),
@@ -123,14 +123,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       title: "Submit",
                       onPressed: () {
                         Registration();
-                        switchScreenPush(
+                        switchScreenReplacement(
                             context,
                             DashboardPage(
                               firstName: firstName.text,
                               lastName: lastName.text,
                               email: email.text,
-                              mobile: mobile.text,
-                              image: FileImage(imageFile),
+                              mobile: widget.mobilenumber,
+                              // image: imageFile!,
                             ));
                       })
                 ],

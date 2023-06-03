@@ -1,22 +1,27 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:phainoit_solutions/global/global.dart';
+import 'package:phainoit_solutions/global/main_button.dart';
+
+import 'login_page.dart';
 
 class DashboardPage extends StatefulWidget {
   String firstName;
   String lastName;
   String email;
   String mobile;
-  ImageProvider<Object>? image;
+  // File? image;
   DashboardPage(
       {super.key,
       required this.firstName,
       required this.lastName,
       required this.email,
       required this.mobile,
-      this.image});
+      // this.image
+      });
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -54,11 +59,13 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(
-                  radius: 60.0,
-                  backgroundImage: widget.image == null
-                      ? AssetImage('assets/1.png')
-                      : widget.image),
+              // widget.image == null
+              //     ? CircleAvatar(
+              //         radius: 60.0, backgroundImage: AssetImage('assets/1.png'))
+              //     : CircleAvatar(
+              //         radius: 60,
+              //         backgroundImage: FileImage(widget.image!),
+              //       ),
               spaceBetween,
               Text("Name: ${widget.firstName}${widget.lastName} "),
               spaceBetween,
@@ -66,6 +73,14 @@ class _DashboardPageState extends State<DashboardPage> {
               spaceBetween,
               Text("Email: ${widget.email}"),
               spaceBetween,
+              MainButton(
+                  title: "Logout",
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false);
+                  })
             ],
           ),
         ),

@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           title: "Login",
                           onPressed: () {
                             if (otp.text == '9933') {
-                              switchScreenPush(
+                              switchScreenReplacement(
                                   context,
                                   RegistrationScreen(
                                     mobilenumber: mobilenumber.text,
