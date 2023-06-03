@@ -49,6 +49,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     if (response.statusCode == 200) {
       Fluttertoast.showToast(msg: s['message']);
+      if (s['message'] == "Your account created successfully") {
+        switchScreenReplacement(
+            context,
+            DashboardPage(
+              firstName: firstName.text,
+              lastName: lastName.text,
+              email: email.text,
+              mobile: widget.mobilenumber,
+              // image: imageFile!,
+            ));
+      } else {
+        
+      }
     }
   }
 
@@ -123,15 +136,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       title: "Submit",
                       onPressed: () {
                         Registration();
-                        switchScreenReplacement(
-                            context,
-                            DashboardPage(
-                              firstName: firstName.text,
-                              lastName: lastName.text,
-                              email: email.text,
-                              mobile: widget.mobilenumber,
-                              // image: imageFile!,
-                            ));
                       })
                 ],
               ),
